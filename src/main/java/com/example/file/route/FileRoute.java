@@ -14,7 +14,7 @@ public class FileRoute extends RouteBuilder{
 	
 	@Override
 	public void configure() throws Exception {
-		from("file://" + path + "input?move=${date:now:yyyyMMdd}/copy-${file:name}")
+		from("file://" + path + "input?noop=true")
 				.log("${file:name}")
 				.to("file://" + path + "output");
 	}
