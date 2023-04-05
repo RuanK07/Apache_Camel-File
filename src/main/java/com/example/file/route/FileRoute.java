@@ -14,7 +14,7 @@ public class FileRoute extends RouteBuilder{
 	
 	@Override
 	public void configure() throws Exception {
-		from("file://" + path + "input?recursive=true")
+		from("file://" + path + "input?excludeExt=png")
 				.log("${file:name}")
 				.to("file://" + path + "output");
 	}
