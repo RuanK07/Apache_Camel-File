@@ -14,9 +14,8 @@ public class FileRoute extends RouteBuilder{
 	
 	@Override
 	public void configure() throws Exception {
-		from("file://" + path + "input")
+		from("file://" + path + "input?move=${date:now:yyyyMMdd}/copy-${file:name}")
 				.log("${file:name}")
-				.process(new FileProcessor())
 				.to("file://" + path + "output");
 	}
 	
@@ -29,11 +28,11 @@ public class FileRoute extends RouteBuilder{
 //	}
 //}
 
-class FileProcessor implements Processor{
-
-	@Override
-	public void process(Exchange exchange) throws Exception {
-		System.out.println("Processor: " + exchange.getIn().getBody());
-	}
-	
-}
+//class FileProcessor implements Processor{
+//
+//	@Override
+//	public void process(Exchange exchange) throws Exception {
+//		System.out.println("Processor: " + exchange.getIn().getBody());
+//	}
+//	
+//}
