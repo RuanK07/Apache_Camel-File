@@ -14,9 +14,9 @@ public class FileRoute extends RouteBuilder{
 	
 	@Override
 	public void configure() throws Exception {
-		from("file://" + path + "input?filterFile=${file:size} < 422")
+		from("file://" + path + "input?recursive=true$delete=True")
 				.log("${file:name}")
-				.to("file://" + path + "output");
+				.to("file://" + path + "output$Flatten=true");
 	}
 	
 }
