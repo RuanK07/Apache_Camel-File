@@ -14,7 +14,7 @@ public class FileRoute extends RouteBuilder{
 	
 	@Override
 	public void configure() throws Exception {
-		from("file://" + path + "input?timeUnit=SECONDS&initialDelay=10")
+		from("file://" + path + "input?filterFile=${file:size} < 422")
 				.log("${file:name}")
 				.to("file://" + path + "output");
 	}
