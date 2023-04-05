@@ -2,6 +2,8 @@ package com.example.file.route;
 
 import java.io.File;
 
+import org.apache.camel.Exchange;
+import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
@@ -14,15 +16,24 @@ public class FileRoute extends RouteBuilder{
 	public void configure() throws Exception {
 		from("file://" + path + "input")
 				.log("${file:name}")
-				.bean("fileComponent")
+				.process(new FileProcessor())
 				.to("file://" + path + "output");
 	}
 	
 }
 
-@Component
-class FileComponent {
-	public void log(File file) {
-		System.out.println("FileComponent: " + file.getName());
+//@Component
+//class FileComponent {
+//	public void log(File file) {
+//		System.out.println("FileComponent: " + file.getName());
+//	}
+//}
+
+class FileProcessor implements Processor{
+
+	@Override
+	public void process(Exchange exchange) throws Exception {
+		System.out.println("Processor: " + exchange.getIn().getBody());
 	}
+	
 }
