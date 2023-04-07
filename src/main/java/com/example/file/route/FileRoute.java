@@ -14,8 +14,12 @@ public class FileRoute extends RouteBuilder{
 	
 	@Override
 	public void configure() throws Exception {
-		from("file://" + path + "input?includeExt=txt")
-				.to("bean:fileComponent");
+		from("file://" + path + "input")
+				.choice()
+					.when(simple("${header.CamelFileLength} < 422"))
+						.to("bean:fileComponent")
+					.otherwise()
+						.process(new FileProcessor());
 	}
 	
 }
@@ -27,11 +31,11 @@ class FileComponent {
 	}
 }
 
-//class FileProcessor implements Processor{
-//
-//	@Override
-//	public void process(Exchange exchange) throws Exception {
-//		System.out.println("Processor: " + exchange.getIn().getBody());
-//	}
-//	
-//}
+class FileProcessor implements Processor{
+
+	@Override
+	public void process(Exchange exchange) throws Exception {
+		System.out.println("Processor: " + exchange.getIn().getBody());
+	}
+
+}
