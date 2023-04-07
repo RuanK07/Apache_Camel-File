@@ -14,19 +14,18 @@ public class FileRoute extends RouteBuilder{
 	
 	@Override
 	public void configure() throws Exception {
-		from("file://" + path + "input?recursive=true$delete=True")
-				.log("${file:name}")
-				.to("file://" + path + "output$Flatten=true");
+		from("file://" + path + "input?includeExt=txt")
+				.to("bean:fileComponent");
 	}
 	
 }
 
-//@Component
-//class FileComponent {
-//	public void log(File file) {
-//		System.out.println("FileComponent: " + file.getName());
-//	}
-//}
+@Component
+class FileComponent {
+	public void log(File file) {
+		System.out.println("FileComponent: " + file.getName());
+	}
+}
 
 //class FileProcessor implements Processor{
 //
