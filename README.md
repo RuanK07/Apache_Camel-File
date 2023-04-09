@@ -1,6 +1,9 @@
 # Apache_Camel-File
 Estudando a aplicação do componente 'file' do Apache Camel framework
 
+### observação
+os commits do repositório representam alguns parâmetros de buscas que podem ser usados no componente
+
 ## Sobre o File
 O componente Apache Camel File é um dos componentes principais do Apache Camel,
 que permite o roteamento e a manipulação de arquivos em um sistema de arquivos local,
